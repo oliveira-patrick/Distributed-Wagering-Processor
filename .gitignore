@@ -1,0 +1,45 @@
+# ---------------------------------------------------------------------------
+# Regras de exclusão do repositório — Distributed Wagering Processor
+# ---------------------------------------------------------------------------
+
+# --- dependências ----------------------------------------------------------
+node_modules/
+.pnp
+.pnp.*
+
+# --- saída de build --------------------------------------------------------
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# --- testes e cobertura ----------------------------------------------------
+coverage/
+*.lcov
+.nyc_output/
+
+# --- cache de ferramentas --------------------------------------------------
+.eslintcache
+.cache/
+*.log
+npm-debug.log*
+bun-debug.log*
+
+# --- segredos --------------------------------------------------------------
+# Nunca versione credenciais. Os valores locais ficam em .env, que não é
+# versionado; o contrato das variáveis vive em .env.example. Ver README.
+.env
+.env.*
+!.env.example
+
+# --- editor e IDE ----------------------------------------------------------
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
+.idea/
+
+# --- sistema operacional ---------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini

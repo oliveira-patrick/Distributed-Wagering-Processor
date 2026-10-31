@@ -1,0 +1,13 @@
+# Normaliza fins de linha para que checkouts em Windows, macOS e Linux concordem.
+* text=auto eol=lf
+
+# Ferramentas exclusivas do Windows esperam CRLF.
+*.cmd       text eol=crlf
+*.bat       text eol=crlf
+*.ps1       text eol=crlf
+
+# Arquivos binários: nunca comparados nem convertidos.
+*.png       binary
+*.jpg       binary
+*.ico       binary
+*.zip       binary

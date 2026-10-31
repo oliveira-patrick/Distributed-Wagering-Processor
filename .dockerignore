@@ -1,0 +1,36 @@
+# O que não entra no contexto de build.
+#
+# `node_modules` fica de fora porque a imagem instala as suas próprias, a
+# partir do lockfile — copiar as do host levaria binários compilados para a
+# arquitetura errada e um contexto de build enorme.
+#
+# `.env` fica de fora porque segredo não entra em imagem. A configuração dos
+# contêineres vem do `docker-compose.yml`.
+
+node_modules/
+.env
+.env.*
+!.env.example
+
+.git/
+.github/
+
+dist/
+build/
+out/
+coverage/
+*.tsbuildinfo
+.eslintcache
+
+# Os testes não rodam dentro da imagem: eles precisam de PostgreSQL e SQS
+# alcançáveis e de bancos descartáveis, e isso é trabalho do Compose e do
+# host, não do contêiner da aplicação.
+test/
+
+docs/
+*.md
+!README.md
+
+Dockerfile
+.dockerignore
+docker-compose.yml

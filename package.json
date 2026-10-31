@@ -1,0 +1,69 @@
+{
+  "name": "distributed-wagering-processor",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Serviço financeiro distribuído para processamento de transações de apostas",
+  "engines": {
+    "bun": ">=1.2.0"
+  },
+  "scripts": {
+    "dev": "bun --watch src/main.ts",
+    "dev:worker": "bun --watch src/worker.ts",
+    "start": "bun src/main.ts",
+    "start:worker": "bun src/worker.ts",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "bun run typecheck && bun run lint && bun run format:check",
+    "test": "bun test test/unit test/smoke",
+    "test:integration": "bun scripts/run-suite.ts test/integration",
+    "infra:up": "docker compose up -d --wait",
+    "infra:down": "docker compose down",
+    "infra:logs": "docker compose logs -f",
+    "infra:reset": "docker compose down -v",
+    "infra:check": "bun scripts/check-infra.ts",
+    "queues:bootstrap": "bun scripts/bootstrap-queues.ts",
+    "migration:create": "bun node_modules/@mikro-orm/cli/cli.js migration:create",
+    "migration:up": "bun node_modules/@mikro-orm/cli/cli.js migration:up",
+    "migration:down": "bun node_modules/@mikro-orm/cli/cli.js migration:down",
+    "migration:list": "bun node_modules/@mikro-orm/cli/cli.js migration:list",
+    "test:concurrency": "bun scripts/run-suite.ts test/concurrency",
+    "test:all": "bun run test && bun run test:integration && bun run test:concurrency"
+  },
+  "dependencies": {
+    "@aws-sdk/client-sqs": "^3.1159.0",
+    "@mikro-orm/core": "^7.2.5",
+    "@mikro-orm/migrations": "^7.2.5",
+    "@mikro-orm/nestjs": "^7.1.0",
+    "@mikro-orm/postgresql": "^7.2.5",
+    "@nestjs/common": "^12.3.2",
+    "@nestjs/config": "^12.0.1",
+    "@nestjs/core": "^12.3.2",
+    "@nestjs/platform-express": "^12.3.2",
+    "@nestjs/terminus": "^12.1.0",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@mikro-orm/cli": "^7.2.5",
+    "@nestjs/testing": "^12.3.2",
+    "@types/bun": "^1.4.4",
+    "@types/supertest": "^7.2.1",
+    "eslint": "^10.13.0",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.9.10",
+    "supertest": "^7.3.1",
+    "typescript": "^5.9.0",
+    "typescript-eslint": "^8.72.1"
+  },
+  "mikro-orm": {
+    "configPaths": [
+      "./mikro-orm.config.ts"
+    ]
+  }
+}
